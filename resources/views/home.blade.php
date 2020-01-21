@@ -17,6 +17,7 @@
                     You are logged in!
 
                     <a href='/payments/create'>  <button> go  </button></a>
+                    <a href='/addcustomer'>  <button> customers  </button></a>
                 </div>
             </div>
         </div>
