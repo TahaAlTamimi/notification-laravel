@@ -17,4 +17,4 @@
     </div>
 </div>
 @endsection
-//   Notification::send(request()->user(), new PaymentRecieved());
+

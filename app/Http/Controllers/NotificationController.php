@@ -1,12 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-use Auth;
-use App\Payment;
-use App\Notifications\PaymentReceive;
+
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Notification;
-class PaymentController extends Controller
+
+class NotificationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +13,7 @@ class PaymentController extends Controller
      */
     public function index()
     {
-        return view('payment');
+        //
     }
 
     /**
@@ -36,29 +34,29 @@ class PaymentController extends Controller
      */
     public function store(Request $request)
     {
-        request()->user()->notify(new PaymentReceive(Auth::user()->id));
-        // Notification::send(request()->user(), new PaymentReceive());
-        return redirect('/home');
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Payment  $payment
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Payment $payment)
+    public function show()
     {
-   
+        return view('notification',[
+            'notifies'=> auth()->user()->notifications
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Payment  $payment
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Payment $payment)
+    public function edit($id)
     {
         //
     }
@@ -67,10 +65,10 @@ class PaymentController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Payment  $payment
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Payment $payment)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -78,10 +76,10 @@ class PaymentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Payment  $payment
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Payment $payment)
+    public function destroy($id)
     {
         //
     }
