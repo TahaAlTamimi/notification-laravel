@@ -36,7 +36,18 @@ add customers
 @enderror
   </div>
 
+  <div class="form-group">
+    <label for="company">company</label>
+    <select name='company_id'  class="form-control" id="company_id" >
+   @foreach($companies as $company)
+      <option  value='{{$company->id}}'>{{$company->name}}</option>
+      @endforeach
 
+    </select>
+    @error('company_id')
+<p>{{$message}}</p>
+@enderror
+  </div>
 
 
 
@@ -65,4 +76,5 @@ add customers
 </div>
 
 </div>
+
 @endsection

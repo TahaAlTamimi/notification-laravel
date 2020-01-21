@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Customer;
 use App\Company;
 use Illuminate\Http\Request;
 
-class CustomerController extends Controller
+class CompanyController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,11 +14,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $activecustomers=Customer::active()->get();
-        $inactivecustomers=Customer::inactive()->get();
-        $companies=Company::all();
-
-       return view('customer',compact('activecustomers','inactivecustomers','companies'));
+        //
     }
 
     /**
@@ -40,29 +35,16 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'name' => 'required',
-            'email' => 'required|email',
-            'status'=>'required',
-            'company_id'=>'required',
-        ]);
-        Customer::create($validatedData);
-
-        // $customer=new Customer;
-        // $customer->name=request('customer');
-        // $customer->email=request('email');
-        // $customer->status=request('status');
-        // $customer->save();
-        return redirect('/addcustomer');
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Customer  $customer
+     * @param  \App\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function show(Customer $customer)
+    public function show(Company $company)
     {
         //
     }
@@ -70,10 +52,10 @@ class CustomerController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Customer  $customer
+     * @param  \App\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function edit(Customer $customer)
+    public function edit(Company $company)
     {
         //
     }
@@ -82,10 +64,10 @@ class CustomerController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Customer  $customer
+     * @param  \App\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Customer $customer)
+    public function update(Request $request, Company $company)
     {
         //
     }
@@ -93,10 +75,10 @@ class CustomerController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Customer  $customer
+     * @param  \App\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Customer $customer)
+    public function destroy(Company $company)
     {
         //
     }
