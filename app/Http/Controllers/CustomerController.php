@@ -14,8 +14,8 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $activecustomers=Customer::where('status',1)->get();
-        $inactivecustomers=Customer::where('status',0)->get();
+        $activecustomers=Customer::active()->get();
+        $inactivecustomers=Customer::inactive()->get();
         // $customers=Customer::all();
 
        return view('customer',compact('activecustomers','inactivecustomers'));
@@ -40,16 +40,17 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'customer' => 'required',
+            'name' => 'required',
             'email' => 'required|email',
             'status'=>'required',
         ]);
-     
-        $customer=new Customer;
-        $customer->name=request('customer');
-        $customer->email=request('email');
-        $customer->status=request('status');
-        $customer->save();
+        Customer::create($validatedData);
+
+        // $customer=new Customer;
+        // $customer->name=request('customer');
+        // $customer->email=request('email');
+        // $customer->status=request('status');
+        // $customer->save();
         return redirect('/addcustomer');
     }
 

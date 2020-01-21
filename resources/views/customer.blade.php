@@ -7,7 +7,7 @@ add customers
 @csrf
 <div class="form-group">
 <label for='customer'>name</label>
-<input class="form-control" name='customer' value="{{old('customer')}}"/>
+<input class="form-control" name='name' value="{{old('name')}}"/>
 @error('customer')
 <p>{{$message}}</p>
 @enderror
