@@ -29,7 +29,9 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        //
+        $companies=Company::all();
+
+        return view('create',compact('companies'));
     }
 
     /**
@@ -40,19 +42,9 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'name' => 'required',
-            'email' => 'required|email',
-            'status'=>'required',
-            'company_id'=>'required',
-        ]);
-        Customer::create($validatedData);
+      
+        Customer::create($this->validatedData());
 
-        // $customer=new Customer;
-        // $customer->name=request('customer');
-        // $customer->email=request('email');
-        // $customer->status=request('status');
-        // $customer->save();
         return redirect('/addcustomer');
     }
 
@@ -64,7 +56,8 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
-        //
+     
+       return view('show',compact('customer'));
     }
 
     /**
@@ -74,8 +67,9 @@ class CustomerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Customer $customer)
-    {
-        //
+    {  $customer=Customer::findOrFail($customer);
+        $companies=Company::all();
+       return view('edit',compact('companies','customer'));
     }
 
     /**
@@ -86,8 +80,11 @@ class CustomerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Customer $customer)
-    {
-        //
+    {  
+       
+    $customer->update( $this->validatedData() );
+    return redirect('/customer/'.$customer->id);
+       
     }
 
     /**
@@ -100,4 +97,15 @@ class CustomerController extends Controller
     {
         //
     }
+   
+    protected function validatedData () 
+    {
+      
+       return request()->validate([
+        'name' => 'required',
+        'email' => 'required|email',
+        'status'=>'required|boolean',
+        'company_id'=>'required|exists:App\Company,id',
+    ]);
+}
 }
